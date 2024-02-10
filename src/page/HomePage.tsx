@@ -1,7 +1,8 @@
 import React from "react";
 import { useGetGaleryApi } from "../api/apis";
 import { useGalleryData } from "../services/useGalleryData";
-
+import "./HomePageStyles.scss";
+import ImageCard from "../component/ImageCard";
 const HomePage = () => {
   const { imageObjectArray, setGetGaleryParams } = useGalleryData({
     page: 0,
@@ -11,23 +12,10 @@ const HomePage = () => {
   });
   console.log("data", imageObjectArray);
 
-  const imageScales = (sizes: number | undefined): number => {
-    if (!sizes) return 500;
-    return sizes - 500;
-  };
-
   return (
-    <div>
+    <div className="tests">
       {imageObjectArray?.map((n) => (
-        <div key={n.title}>
-          <div>{n.title}</div>
-          <img
-            src={n.thubnailUrl?.link}
-            alt=""
-            width={imageScales(n.thubnailUrl?.width)}
-            height={imageScales(n.thubnailUrl?.height)}
-          />
-        </div>
+        <ImageCard key={n.title} {...n}></ImageCard>
       ))}
       <button
         onClick={() => {
