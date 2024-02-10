@@ -1,23 +1,18 @@
-import { ImageObjectDtoType } from "./DtoTypes";
+import { ImageObjectDtoType, thubnailUrlType } from "./DtoTypes";
 
 const apiRawDataToImageObjectDto = (apiObj: any): ImageObjectDtoType => {
-  const { title, description, images } = apiObj;
-
-  return {
-    description: description,
-    thubnailUrl: getImage(images),
-    title: title,
-  };
+  const { images } = apiObj;
+  return { ...apiObj, thubnailUrl: getImage(images) };
 };
 
 const getImage = (
   list: Array<{ type: string; link: string }>
-): string | undefined => {
+): thubnailUrlType | undefined => {
   if (!list) return;
   const imageObjects = list.filter((n) => n.type === "image/jpeg");
   if (imageObjects.length === 0) return;
-  const image = imageObjects[0].link;
-  return image;
+  const image = imageObjects[0];
+  return image as unknown as thubnailUrlType;
 };
 
 export const apiRawDataToImageObjectDtoList = (
