@@ -1,5 +1,5 @@
 import React from "react";
-import { ImageObjectDtoType } from "../dtos/DtoTypes";
+import { ImageObjectDtoType } from "../types/DtoTypes";
 
 interface ImageCardProps extends ImageObjectDtoType {}
 const ImageCard = ({

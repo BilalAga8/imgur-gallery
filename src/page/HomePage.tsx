@@ -1,5 +1,4 @@
 import React from "react";
-import { useGetGaleryApi } from "../api/apis";
 import { useGalleryData } from "../services/useGalleryData";
 import "./HomePageStyles.scss";
 import ImageCard from "../component/ImageCard";
