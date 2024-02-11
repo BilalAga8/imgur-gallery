@@ -2,6 +2,7 @@ import React from "react";
 import { useGalleryData } from "../services/useGalleryData";
 import "./HomePageStyles.scss";
 import ImageCard from "../component/ImageCard";
+import Tabs from "../component/Tabs";
 const HomePage = () => {
   const { imageObjectArray, setGetGaleryParams } = useGalleryData({
     page: 0,
@@ -13,9 +14,14 @@ const HomePage = () => {
 
   return (
     <div className="tests">
+      <Tabs></Tabs>
+      {/* krijimi i nj komponenti ui */}
+      {/* krijo tebet komponent m vete */}
+      {/* component m vete */}
       {imageObjectArray?.map((n) => (
-        <ImageCard key={n.title} {...n}></ImageCard>
+        <ImageCard key={n.title} {...n} />
       ))}
+
       <button
         onClick={() => {
           setGetGaleryParams({

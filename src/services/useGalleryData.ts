@@ -10,7 +10,7 @@ import {
 
 export const useGalleryData = (initData: GalleryPathParamitersType) => {
   const [getGaleryParams, setGetGaleryParams] = useState(initData);
-  const { error, data, isFetching, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["asdfdasfsdfdsafsda"],
     queryFn: () =>
       API_CONSTANTS.online ? getGalleryApi(getGaleryParams) : getGalleryTests(),
@@ -20,6 +20,7 @@ export const useGalleryData = (initData: GalleryPathParamitersType) => {
   useEffect(() => {
     refetch();
   }, [getGaleryParams]);
+
   const getImage = (
     list: Array<{ type: string; link: string }>
   ): thubnailUrlType | undefined => {
@@ -29,18 +30,22 @@ export const useGalleryData = (initData: GalleryPathParamitersType) => {
     const image = imageObjects[0];
     return image as unknown as thubnailUrlType;
   };
+
   const apiRawDataToImageObjectDto = (apiObj: any): ImageObjectDtoType => {
     const { images } = apiObj;
     return { ...apiObj, thubnailUrl: getImage(images) };
   };
+
   const apiRawDataToImageObjectDtoList = (
     apiObj: Array<any>
   ): Array<ImageObjectDtoType> => {
     if (!apiObj) return [];
     return apiObj.map(apiRawDataToImageObjectDto);
   };
+
   const imageObjectArray: Array<ImageObjectDtoType> =
     apiRawDataToImageObjectDtoList(data?.data);
+
   const getGalleryApi = (galery: GalleryPathParamitersType) =>
     fetch(API_CONSTANTS.url + getGalleryPath(galery), {
       headers: {

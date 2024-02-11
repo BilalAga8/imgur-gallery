@@ -20,3 +20,5 @@ export const getGalleryPath = ({
 }: GalleryPathParamitersType): string => {
   return `/3/gallery/${section}/${sort}/${window}/${page}?showViral=true&mature=true&album_previews=true`;
 };
+
+export const NAVTAB = ["hot", "top", "user"];
