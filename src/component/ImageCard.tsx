@@ -2,7 +2,9 @@ import React from "react";
 import { ImageObjectDtoType } from "../types/DtoTypes";
 import "./ImageCard.scss";
 
-interface ImageCardProps extends ImageObjectDtoType {}
+interface ImageCardProps extends ImageObjectDtoType {
+  onClick: () => void;
+}
 const ImageCard = ({
   description,
   downs,
@@ -10,6 +12,7 @@ const ImageCard = ({
   thubnailUrl,
   title,
   ups,
+  onClick,
 }: ImageCardProps) => {
   const imageScales = (sizes: number | undefined): number => {
     if (!sizes) return 500;
@@ -22,6 +25,7 @@ const ImageCard = ({
 
   return (
     <div
+      onClick={onClick}
       className="card"
       style={{
         gridRowEnd: `span 1`,

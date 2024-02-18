@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGalleryData } from "../services/useGalleryData";
 import "./HomePageStyles.scss";
 import ImageCard from "../component/ImageCard";
 import Tabs from "../component/Tabs";
 import Dropdown from "../component/DropdownSelect.tsx/Dropdown";
+import ImageDetails from "../component/imageDetails/ImageDetails";
+import { ImageObjectDtoType } from "../types/DtoTypes";
 const HomePage = () => {
   const { imageObjectArray, setGetGaleryParams, getGaleryParams } =
     useGalleryData({
@@ -12,6 +14,8 @@ const HomePage = () => {
       sort: "rising",
       window: "day",
     });
+
+  const [imageSelected, setImageSelected] = useState<ImageObjectDtoType>();
   console.log("data", imageObjectArray);
 
   return (
@@ -31,9 +35,21 @@ const HomePage = () => {
       {/* component m vete */}
       <div className="photoDisplayGrid">
         {imageObjectArray?.map((n, index) => (
-          <ImageCard key={n.title} {...n} />
+          <ImageCard
+            onClick={() => {
+              setImageSelected(n);
+            }}
+            key={n.title}
+            {...n}
+          />
         ))}
       </div>
+      {imageSelected && (
+        <ImageDetails
+          onClose={() => setImageSelected(undefined)}
+          imageObj={imageSelected}
+        />
+      )}
     </div>
   );
 };

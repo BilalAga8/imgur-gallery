@@ -1,6 +1,6 @@
 export const API_CONSTANTS = {
   url: "https://api.imgur.com",
-  clientId: "be4d89202e2caf4",
+  clientId: process.env.REACT_APP_IMGUR_CLIENT_ID,
 };
 export type sectionType = "hot" | "top" | "user";
 export type sortType = "viral" | "top" | "time" | "rising";
