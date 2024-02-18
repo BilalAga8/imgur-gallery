@@ -31,7 +31,20 @@ const ImageCard = ({
         gridRowEnd: `span 1`,
       }}
     >
-      <img src={thubnailUrl?.link} alt={title} className="card__photo" />
+      {thubnailUrl?.type === "video" && (
+        <video
+          style={{
+            objectFit: "contain",
+          }}
+          muted
+          autoPlay
+          src={thubnailUrl.link}
+          className="card__photo"
+        ></video>
+      )}
+      {thubnailUrl?.type === "image" && (
+        <img src={thubnailUrl?.link} alt={title} className="card__photo" />
+      )}
       <div className="card__content">
         <h2 className="card__title">{title}</h2>
         <p className="card__description">{description}</p>

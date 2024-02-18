@@ -6,4 +6,11 @@
   overflow: hidden;
   width: 100%;
   background-color: #c0b7ff;
+  display: flex;
+  flex-direction: column;
+}
+.card__photo {
+  height: auto;
+  flex: 1;
+  height: 75%;
 }

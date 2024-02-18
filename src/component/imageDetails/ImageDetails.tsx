@@ -11,13 +11,25 @@ const ImageDetails = ({ imageObj, onClose }: ImageDetailsProps) => {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <img
-          width={500}
-          height={500}
-          src={thubnailUrl?.link}
-          alt={title}
-          className="modal-image"
-        />
+        {thubnailUrl?.type === "video" && (
+          <video
+            width={500}
+            height={500}
+            autoPlay
+            src={thubnailUrl.link}
+            className="modal-image"
+          ></video>
+        )}
+        {thubnailUrl?.type === "image" && (
+          <img
+            width={500}
+            height={500}
+            src={thubnailUrl?.link}
+            alt={title}
+            className="modal-image"
+          />
+        )}
+
         <div className="modal-details">
           <h2 className="modal-title">{title}</h2>
           <p className="modal-description">{description}</p>

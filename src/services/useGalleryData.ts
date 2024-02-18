@@ -24,10 +24,15 @@ export const useGalleryData = (initData: GalleryPathParamitersType) => {
     list: Array<{ type: string; link: string }>
   ): thubnailUrlType | undefined => {
     if (!list) return;
-    const imageObjects = list.filter((n) => n.type === "image/jpeg");
+    const imageObjects = list.filter(
+      (n) => n.type.includes("image") || n.type.includes("video")
+    );
     if (imageObjects.length === 0) return;
     const image = imageObjects[0];
-    return image as unknown as thubnailUrlType;
+    return {
+      ...image,
+      type: image.type.includes("image") ? "image" : "video",
+    } as unknown as thubnailUrlType;
   };
 
   const apiRawDataToImageObjectDto = (apiObj: any): ImageObjectDtoType => {
