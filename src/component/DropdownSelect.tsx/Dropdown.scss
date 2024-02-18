@@ -1,0 +1,14 @@
+.selectContainer {
+  height: fit-content;
+  height: 50px;
+  width: 130px;
+  max-width: 100%;
+  border-radius: 5px;
+  font-size: 21px;
+  border: 2px solid purple;
+  padding: 10px;
+}
+option {
+  -webkit-filter: blur(3px);
+  filter: blur(4px);
+}

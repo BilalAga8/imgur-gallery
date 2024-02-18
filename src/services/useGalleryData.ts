@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ImageObjectDtoType, thubnailUrlType } from "../types/DtoTypes";
 import { useQuery } from "react-query";
-import testData from "../testData/testData.json";
 import {
   API_CONSTANTS,
   GalleryPathParamitersType,
@@ -9,11 +8,11 @@ import {
 } from "./config";
 
 export const useGalleryData = (initData: GalleryPathParamitersType) => {
-  const [getGaleryParams, setGetGaleryParams] = useState(initData);
+  const [getGaleryParams, setGetGaleryParams] =
+    useState<GalleryPathParamitersType>(initData);
   const { data, refetch } = useQuery({
     queryKey: ["asdfdasfsdfdsafsda"],
-    queryFn: () =>
-      API_CONSTANTS.online ? getGalleryApi(getGaleryParams) : getGalleryTests(),
+    queryFn: () => getGalleryApi(getGaleryParams),
 
     staleTime: Infinity,
   });
@@ -46,21 +45,25 @@ export const useGalleryData = (initData: GalleryPathParamitersType) => {
   const imageObjectArray: Array<ImageObjectDtoType> =
     apiRawDataToImageObjectDtoList(data?.data);
 
-  const getGalleryApi = (galery: GalleryPathParamitersType) =>
-    fetch(API_CONSTANTS.url + getGalleryPath(galery), {
+  const getGalleryApi = async (galery: GalleryPathParamitersType) => {
+    const getData = await fetch(API_CONSTANTS.url + getGalleryPath(galery), {
+      // mode: "cors",
+      // mode: "cors",
+      // cache: "no-cache",
+      // credentials: "same-origin",
+      // redirect: "follow",
+      referrerPolicy: "no-referrer",
       headers: {
         Authorization: `Client-ID ${API_CONSTANTS.clientId}`,
+        // "Content-Type": "application/json",
       },
-    })
-      .then((res) => res.json())
-      .then((n) => n.data);
-
-  const getGalleryTests = () =>
-    new Promise((res, error) => {
-      res(testData);
     });
+    return await getData.json();
+  };
+
   return {
     imageObjectArray,
     setGetGaleryParams,
+    getGaleryParams,
   };
 };

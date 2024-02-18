@@ -1,11 +1,35 @@
-import { NAVTAB } from "../services/config";
+import {
+  GalleryPathParamitersType,
+  NAVTAB,
+  sectionType,
+} from "../services/config";
 import "./Tabs.scss";
-const Tabs = () => {
+interface TabsProps {
+  getGaleryParams: GalleryPathParamitersType;
+  setGetGaleryParams: React.Dispatch<
+    React.SetStateAction<GalleryPathParamitersType>
+  >;
+}
+const Tabs = ({ getGaleryParams, setGetGaleryParams }: TabsProps) => {
+  const sectionHandle = (tabsLabel: sectionType) => {
+    setGetGaleryParams((prev) => ({
+      ...prev,
+      section: tabsLabel,
+    }));
+  };
   return (
     <div className="tab-container">
       <div className="tabs">
         {NAVTAB.map((tabsLabel, index) => (
-          <button key={index} className="tab-button">
+          <button
+            onClick={() => sectionHandle(tabsLabel)}
+            key={index}
+            className={`${
+              getGaleryParams.section !== tabsLabel
+                ? "tab-button"
+                : "tab-button-active"
+            }`}
+          >
             {tabsLabel}
           </button>
         ))}

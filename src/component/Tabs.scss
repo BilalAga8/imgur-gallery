@@ -1,18 +1,33 @@
 .tab-container {
   display: flex;
+  justify-content: center;
   .tabs {
     align-items: center;
-    gap: 10px;
     display: flex;
+    border: 2px solid #925ece;
+    border-radius: 8px;
+    -webkit-box-shadow: 3px 5px 23px -7px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 3px 5px 23px -7px rgba(0, 0, 0, 0.75);
+    box-shadow: 3px 5px 23px -7px rgba(0, 0, 0, 0.75);
+    overflow: hidden;
+    margin: 20px 0;
     .tab-button {
       background: transparent;
       border: none;
-      text-transform: capitalize;
-      font-size: 16px;
-      font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+      text-transform: uppercase;
+      padding: 20px;
+      font-size: 21px;
+      font-weight: bold;
+      border-right: 2px solid #925ece;
+      transition: 0.5s ease-in-out;
+      &:last-child {
+        border: none;
+      }
     }
-    .tab-button:active {
+    .tab-button-active {
+      @extend .tab-button;
       background-color: #c0b7ff;
+      color: #220828;
     }
   }
 }

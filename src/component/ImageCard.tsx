@@ -1,5 +1,6 @@
 import React from "react";
 import { ImageObjectDtoType } from "../types/DtoTypes";
+import "./ImageCard.scss";
 
 interface ImageCardProps extends ImageObjectDtoType {}
 const ImageCard = ({
@@ -14,15 +15,23 @@ const ImageCard = ({
     if (!sizes) return 500;
     return sizes - 500;
   };
+  function getRandomArbitrary(min: number, max: number) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+  const number3Randoms = getRandomArbitrary(0, 3);
+
   return (
-    <div>
-      <div>{title}</div>
-      <img
-        src={thubnailUrl?.link}
-        alt=""
-        width={imageScales(thubnailUrl?.width)}
-        height={imageScales(thubnailUrl?.height)}
-      />
+    <div
+      className="card"
+      style={{
+        gridRowEnd: `span 1`,
+      }}
+    >
+      <img src={thubnailUrl?.link} alt={title} className="card__photo" />
+      <div className="card__content">
+        <h2 className="card__title">{title}</h2>
+        <p className="card__description">{description}</p>
+      </div>
     </div>
   );
 };
